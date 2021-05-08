@@ -1,0 +1,15 @@
+.center {
+    text-align: center;
+    margin-left: 20%;
+  }
+  h2.heading-center {
+    margin-left: 20%;
+  }
+  
+
+  element.style {
+  width: 230px;
+  transform: translateX(0px);
+}
+
+

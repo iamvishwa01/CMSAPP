@@ -1,0 +1,53 @@
+#slide-out{
+    margin-top:64px;
+    background-color: black;
+  }
+  
+  #dropdown1, #dropdown2{
+    margin-top:64px;
+  }
+  
+  .dropdown-content li > a{
+    color:#00bcd4 !important;
+  }
+  
+  .side-nav li.active{
+    background-color:#00bcd4 !important;
+  }
+  
+  .side-nav li.user-li.active{
+    background-color:#ac3973 !important;
+  }
+  
+   .side-nav li.active.lone a,.side-nav li.active ul li:first-child, .side-nav li.active.lone a svg, .side-nav li.active ul li div.collapsible-header p svg{
+    color:#FFFFFF !important;
+  }
+  
+  .my-icon{
+    font-size:1.5em;
+    margin-right:14px;
+    color:white;
+  }
+  
+  .changed{
+    margin-left:5px;
+    color:#666666;
+  }
+  
+  .no-margin{
+    margin:0px;
+  }
+  
+  .user-li{
+    background-color:#c6538c !important;
+  }
+
+  .side-nav.fixed a {
+    display: block;
+    padding: 0 16px;
+    color: white;
+    
+}
+#slide-out{
+  width: 230px;
+}

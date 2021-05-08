@@ -1,0 +1,77 @@
+
+  .brand-logo{
+    width: 94px;
+    height: 56px;
+  }
+::-webkit-scrollbar {
+    display: none;
+}
+main {
+    flex: 1 0 auto;
+  }
+  .underline{
+    text-decoration: underline;
+     }
+     .row{
+        font-size: 10px;
+    }
+   #text22{
+       font-size: 18px;
+       color: white;
+   }
+  
+   i{
+       color: white;
+   }
+  .sidenav{
+      color: white;
+  }
+   nav ul li a{
+      color: white;
+   }
+   .links{
+       font-size: 18px;
+       color: white; 
+    text-decoration: underline;
+   }
+  
+  .page-footer{
+      color: white;
+  }
+  #text22{
+      color: white; 
+     
+  }
+  
+  .whitecolor{
+      color: white;
+      
+  }
+  .card-title{
+     font-weight: bold;
+     
+  }
+
+  .fa-facebook:hover{
+    background-color: #3b5998 !important;
+}
+.fa-twitter:hover{
+    background-color: #00ACEE !important;
+}
+
+.fa-instagram:hover{
+    background-color: #E1306C !important;
+}
+.nav-wrapper ul li:hover,  li.active {
+    background-color: #d50000 !important;
+    }
+#iconf{
+color: white;
+font-size: 18px;
+margin: 8px;
+}
+@media (max-width: 600px) {
+    nav .brand-logo { 
+        overflow: hidden;
+    }
+}

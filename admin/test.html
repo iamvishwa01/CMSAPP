@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function validateForm() {
+
+var x=document.forms["myForm"]["name"].value;
+if (x==null || x=="")
+ {
+  alert("Name must be filled out");
+  return false;
+ }
+
+var y=document.forms["myForm"]["password"].value;
+if (y==null || y=="") {
+  alert("Password name must be filled out");
+  return false;
+}
+}
+</script>
+</head>
+
+<body>
+
+<form name="myForm" action="demo_form.asp" onsubmit="return validateForm()" method="post">
+Name*: <input type="text" name="name"> <br>
+Password*: <input type="password" name="password"><br>
+Email: <input type="text" name="email"><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+<html>
+
+<!-- if(isset($_POST['submit'])){
+  
+  $name       = $_FILES['file']['name'];  
+  $temp_name  = $_FILES['file']['tmp_name']; 
+  $post_category_id = $_POST['post_category_id'];
+  $post_title = $_POST['post_title'];
+  $post_author = $_POST['post_author'];
+  $post_user = $_POST['post_user'];
+  //$post_date = date('d-m-y');
+  $post_content = $_POST['post_content'];
+  $post_tags = $_POST['post_tags'];
+  $post_comment_count = $_POST['post_comment_count'];
+  $post_status = $_POST['post_status'];
+  $post_views_count = $_POST['post_views_count'];
+  $post_category = $_POST['categories'];
+  if(isset($name) and !empty($name)){
+    $location = '../uploads/';    
+     if(move_uploaded_file($temp_name, $location.$name)){
+       // echo 'File uploaded successfully';
+        $insertImage= "insert into posts (
+          post_category_id, post_title,post_author ,post_user,post_date,
+          post_image,post_content,post_tags,post_comment_count,post_status,
+          post_views_count,category ) ";
+        $insertImage .=  "values({$post_category_id},
+        '{$post_title}',
+        '{$post_author}',
+        '{$post_user}',
+        now(),
+        '{$name}',
+        '{$post_content}',
+        '{$post_tags}',
+        '{$post_comment_count}',
+        '{$post_status}',
+        {$post_views_count} ,
+        '{$post_category}') ";
+       $result = mysqli_query($conn,$insertImage);
+       if($result){
+        $success_post = "Post Added Successfully.";
+        echo "<script>
+        var delay = 1000; 
+            var url = 'addposts.php'
+            setTimeout(function(){ window.location = url; }, delay);
+        </script>";
+        echo "<script>Materialize.toast('$success_post', 3000, 'green darken-2 rounded');</script>"; 
+      }else{
+       // echo '<script>alert("Something went wrong!!")</script>';
+       $error_post = "Error in adding post";
+       echo "<script>
+       var delay = 1000; 
+           var url = 'addposts.php'
+           setTimeout(function(){ window.location = url; }, delay);
+       </script>";
+       echo "<script>Materialize.toast('$error_post', 3000, 'deep-orange accent-4 rounded');</script>"; 
+      }
+  }
+
+} else {
+  
+$empty_msg = "Please Select a file !!";
+  
+echo "<script>Materialize.toast('$empty_msg', 3000, 'orange accent-2 darken-2 rounded');</script>"; 
+}
+}  -->
+
+
+<!-- <script type="text/javascript">
+function validateForm() {
+  var id = document.forms["myForm"]["post_category_id"].value;
+  var title = document.forms["myForm"]["post_title"].value;
+  var author = document.forms["myForm"]["post_author"].value;
+  var user = document.forms["myForm"]["post_user"].value;
+  var tags = document.forms["myForm"]["post_tags"].value;
+  var commn_count = document.forms["myForm"]["post_comment_count"].value;
+  var view_count = document.forms["myForm"]["post_views_count"].value;
+  
+  if (id == "" || id == null ) {
+    Materialize.toast('Post Category id cannot be empty!', 3000, 'amber accent-4 rounded');
+    return false;
+  }
+  if (title == "" || title == null ) {
+  alert("Email must be filled out");
+    return false;
+  }
+  if (author == "" || author == null ) {
+    alert("Name must be filled out");
+    return false;
+  }
+  if (user == "" || user == null) {
+  alert("Email must be filled out");
+    return false;
+  }
+  if (tags == "" || tags == null) {
+    alert("Name must be filled out");
+    return false;
+  }
+  if (commn_count == "" || commn_count == null) {
+  alert("Email must be filled out");
+    return false;
+  }
+  if (view_count == "" || view_count == null) {
+  alert("Email must be filled out");
+    return false;
+  }
+}
+</script> -->
+
+
+ 
+$select_post= "select * from posts where id = '{$the_post_id}' ";
+$records = mysqli_query($conn,$select_post); // fetch data from database
+
+while($data = mysqli_fetch_assoc($records))
+{
+$post_id= $data['post_id']; 
+ $post_category_id=  $data['post_category_id']; 
+  $post_title= $data['post_title'];    
+ $post_author=  $data['post_author']; 
+ $post_user=  $data['post_user']; 
+ $post_date= $data['post_date']; 
+  $post_image1= $data['post_image']; 
+ $post_content=  $data['post_content']; 
+ $post_tag=  $data['post_tags']; 
+  $post_comment_count= $data['post_comment_count'];
+  $post_status = $data['post_status'];
+  $post_views_count= $data['post_views_count']; 
+  $post_category= $data['category'];
+
+
+}
