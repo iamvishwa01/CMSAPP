@@ -2,15 +2,17 @@
 
 include 'includes/conn.php';
 session_start();
-if(isset($_SESSION['user_name'])){
+if (isset($_SESSION['user_name'])) {
   header('Location: admin/dashboard.php');
-}else{
+} else {
 
-if (isset($_POST['action'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-if(empty($username) && empty($password)){
-  echo  '<div class="alert alert-danger">
+  if (isset($_POST['action'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $username =  mysqli_real_escape_string($conn, $username);
+    $password = mysqli_real_escape_string($conn, $password);
+    if (empty($username) && empty($password)) {
+      echo  '<div class="alert alert-danger">
               
   <p style="padding: 20px;
   background-color: #d50000;
@@ -18,8 +20,8 @@ if(empty($username) && empty($password)){
 text-align: center;
 font-size: 20px;"> Username or password Fields are empty!!</p>
 </div>';
-}else if(empty($username)){
-  echo  '<div class="alert alert-danger">
+    } else if (empty($username)) {
+      echo  '<div class="alert alert-danger">
               
   <p style="padding: 20px;
   background-color: #d50000;
@@ -27,8 +29,8 @@ font-size: 20px;"> Username or password Fields are empty!!</p>
 text-align: center;
 font-size: 20px;"> Username is empty!!</p>
 </div>';
-}else if(empty($password)){
-  echo  '<div class="alert alert-danger">
+    } else if (empty($password)) {
+      echo  '<div class="alert alert-danger">
               
   <p style="padding: 20px;
   background-color: #d50000;
@@ -36,30 +38,28 @@ font-size: 20px;"> Username is empty!!</p>
 text-align: center;
 font-size: 20px;"> Password is empty!!</p>
 </div>';
-}
-else{
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  stripslashes($username);
-  stripslashes($password);
-  trim($username);
-  trim($password);
-  $username1 =  mysqli_real_escape_string($conn, $username);
-  $password1 = mysqli_real_escape_string($conn, $password);
-  
-  $sql = "select * from admin where username = '".$username1."'";
-	$rs = mysqli_query($conn,$sql);
-	$numRows = mysqli_num_rows($rs);
-	
-	if($numRows  == 1){
-		$row = mysqli_fetch_assoc($rs);
-		if(password_verify($password,$row['password'])){
-			$_SESSION['user_name'] = $username1;
-    //$_SESSION['email1'] = $user_email;
-    header('Location: admin/dashboard.php');
-		}
-		else{
-      echo  '<div class="alert alert-danger">
+    } else {
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      stripslashes($username);
+      stripslashes($password);
+      trim($username);
+      trim($password);
+      $username1 =  mysqli_real_escape_string($conn, $username);
+      $password1 = mysqli_real_escape_string($conn, $password);
+
+      $sql = "select * from admin where username = '" . $username1 . "'";
+      $rs = mysqli_query($conn, $sql);
+      $numRows = mysqli_num_rows($rs);
+
+      if ($numRows  == 1) {
+        $row = mysqli_fetch_assoc($rs);
+        if (password_verify($password, $row['password'])) {
+          $_SESSION['user_name'] = $username1;
+          //$_SESSION['email1'] = $user_email;
+          header('Location: admin/dashboard.php');
+        } else {
+          echo  '<div class="alert alert-danger">
               
       <p style="padding: 20px;
       background-color: #d50000;
@@ -67,10 +67,9 @@ else{
     text-align: center;
     font-size: 20px;"> Username or password wrong! Please try again!.</p>
     </div>';
-		}
-	}
-	else{
-		echo  '<div class="alert alert-danger">
+        }
+      } else {
+        echo  '<div class="alert alert-danger">
               
              <p style="padding: 20px;
              background-color: #d50000;
@@ -78,15 +77,15 @@ else{
            text-align: center;
            font-size: 20px;"> Username or password wrong! Please try again!.</p>
            </div>';
-	}
-  
-}
-}
+      }
+    }
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -105,6 +104,7 @@ else{
   <title>CMS DASHBOARD</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 </head>
+
 <body>
   <div class="background-image"></div>
   <div class="title">
@@ -115,16 +115,16 @@ else{
       <div class="card grey lighten-3">
         <div class="card-content">
           <h4 class="card-title center-align">Login</h4>
-          <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+          <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">person_outline</i>
-                <input class="validate" id="username" type="text" name="username"pattern="[A-Za-z]+" minlength="4" maxlength="10"value="<?php echo isset($_POST['username']) ? $_POST['username'] : '' ?>" required>
+                <input class="validate" id="username" type="text" name="username" pattern="[A-Za-z]+" minlength="4" maxlength="10" value="<?php echo isset($_POST['username']) ? $_POST['username'] : '' ?>" required>
                 <label for="username" data-error="wrong" data-success="right">username</label>
               </div>
               <div class="input-field col s12">
                 <i class="material-icons prefix">lock_outline</i>
-                <input id="password" type="password" name="password" required >
+                <input id="password" type="password" name="password" required>
                 <label for="password">Password</label>
               </div>
 
@@ -151,5 +151,5 @@ else{
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="js/loader.js"></script>
 </body>
-</html>
 
+</html>

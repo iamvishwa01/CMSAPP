@@ -1,5 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
-
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+}
 html,
 body {
   -moz-box-sizing: border-box;
@@ -98,4 +109,13 @@ h1.heading {
   font-weight: 600;
   text-transform: uppercase;
   text-align: right;
+}
+
+.navbar-nav > li {
+  margin-left: 60px;
+  margin-right: 10px;
+}
+.navbar-nav > li {
+  padding-left: 10px;
+  padding-right: 0px;
 }

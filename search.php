@@ -2,6 +2,7 @@
 include 'includes/conn.php';
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,15 +10,14 @@ include 'includes/conn.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link type="text/css" rel="stylesheet" href="external_css/homepage.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="external_css/footer.css" media="screen,projection" /> -->
+    <link type="text/css" rel="stylesheet" href="external_css/homepage.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="external_css/footer.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap-grid.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap-grid.min.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap-reboot.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="external_css/css/bootstrap-reboot.min.css" media="screen,projection" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" />
     <title>Document</title>
@@ -47,7 +47,7 @@ include 'includes/conn.php';
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0" action="search.php" method="POST">
+            <form class="form-inline my-2 my-lg-0" action="#" method="POST">
                 <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" name='submit' type="submit">Search</button>
             </form>
@@ -58,54 +58,86 @@ include 'includes/conn.php';
         <div class="container-fostrap">
 
             <div class="content">
-                <?php
-                $post_ids =  $_GET['show'];
-                // echo "$post_ids";
-                stripslashes($post_ids);
-                trim($post_ids);
-                $post_ids = mysqli_real_escape_string($conn, $post_ids);
-                $show_all_post_by_id = "select * from posts where post_id= $post_ids ";
-                $result = mysqli_query($conn, $show_all_post_by_id);
-                if (!$result) {
-                    echo "Error in connectiing database";
-                }
-                $count = mysqli_num_rows($result);
-                if ($count == 0) {
-                    echo " There is no posts";
-                } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $post_id = $row['post_id'];
-                        $post_category_id = $row['post_category_id'];
-                        $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
-                        $post_date = $row['post_date'];
-                        $post_image = $row['post_image'];
-                        $post_desp = $row['post_desp'];
-                        $post_content = $row['post_content'];
-                        $post_comments = $row['comments'];
-                    }
-                }
 
-                ?>
-                <br>
-                <section>
-                    <div class="container" style="background-color: hsla(107, 0%, 91%, 1);">
-                        <?php $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
-                        <a href="<?php echo $actual_link; ?>" style="color: black;">
-                            <h1><?php echo "$post_title"; ?></h1>
-                        </a>
-                        <p style="font-size: 15px;font-style: italic;">By <?php echo "$post_author"; ?> | <?php echo "Last Updated $post_date"; ?></p>
-                        <img src="uploads/<?php echo $post_image; ?>" class="img-fluid w-25 p-3" />
+                <div class="container">
 
-                        <p><?php echo "$post_content"; ?></p>
+                    <div class="row">
+                        <!--  -->
 
+                        <?php
+                        if (isset($_POST['submit'])) {
+                            $search_post = $_POST['search'];
+                            stripslashes($search_post);
+                            trim($search_post);
+                            htmlspecialchars($search_post);
+                            $showAllPost = "select * from posts where post_tags like '%$search_post%' Limit 10 ";
+                            $query = mysqli_query($conn, $showAllPost);
+                            if (!$query) {
+                                echo "something went wrong";
+                            }
+                            $count_rows = mysqli_num_rows($query);
+                            if ($count_rows == 0) {
+                                echo "No resuls found for $search_post";
+                            } else {
+                                while ($row = mysqli_fetch_assoc($query)) {
+
+                                    $post_id = $row['post_id'];
+                                    $post_category_id = $row['post_category_id'];
+                                    $post_title = $row['post_title'];
+                                    $post_author = $row['post_author'];
+                                    $post_date = $row['post_date'];
+                                    $post_image = $row['post_image'];
+                                    $post_desp = $row['post_desp'];
+                                    $post_content = $row['post_content'];
+
+                                    $post_desp_cut_data = substr($post_desp, 0, 80);
+                        ?>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="card">
+                                            <a class="img-card" href="">
+                                                <img src="uploads/<?php echo $post_image; ?>" />
+                                            </a>
+                                            <div class="card-content">
+                                                <h4 class="card-title">
+                                                    <a href="#"> <?php echo "$post_title"; ?>
+                                                    </a>
+                                                </h4>
+                                                <p class="">
+                                                    <?php echo "$post_content"; ?>
+                                                </p>
+                                                <!-- <div class="text-left"> -->
+
+                                                <div class="text-left">
+                                                    <h6>By <?php echo "$post_author"; ?></h6>
+
+                                                </div>
+                                            </div>
+                                            <div class="card-read-more ">
+
+                                                <a href='<?php echo "showposts.php?show={$post_id}" ?>' class="btn btn-link btn-block">
+                                                    Read More
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                     </div>
-                </section>
+        <?php
+                                }
+                            }
+                        }
+        ?>
+
+
+
+
+
+                </div>
             </div>
         </div>
 
     </section>
 
+    <!-- Footer -->
     <!-- Latest compiled and minified JavaScript -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

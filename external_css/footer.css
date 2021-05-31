@@ -1,0 +1,49 @@
+.footer {
+  background-color: black;
+  color: white;
+  position: fixed;
+}
+.fa-facebook-f {
+  color: white;
+  font-size: 20px;
+}
+.fa-facebook-f:hover {
+  color: #3b5998;
+}
+.fa-twitter {
+  color: white;
+  font-size: 20px;
+}
+.fa-twitter:hover {
+  color: #00acee;
+}
+.fa-linkedin-in {
+  color: white;
+  font-size: 20px;
+}
+.fa-linkedin-in:hover {
+  color: #0077b5;
+}
+
+.fa-instagram {
+  color: white;
+  font-size: 20px;
+}
+.fa-instagram:hover {
+  color: #8a3ab9;
+}
+
+h6.foothead {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  position: relative;
+  transition-duration: 0.7s;
+  transition-timing-function: linear;
+}
+
+h6.foothead:hover {
+  color: tomato;
+  text-decoration: underline;
+}
