@@ -1,15 +1,15 @@
 <?php
 
 include '../includes/conn.php';
-session_start();
+//session_start();
 ob_start();
 ?>
 
-<?php
-if (!isset($_SESSION['user_name'])) {
-  header("Location: ../login.php");
-}
-?>
+//<?php
+//if (!isset($_SESSION['user_name'])) {
+//  header("Location: ../login.php");
+//}
+//?>
 
 <!DOCTYPE html>
 <html>
