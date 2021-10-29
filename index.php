@@ -48,7 +48,7 @@ font-size: 20px;"> Password is empty!!</p>
       $username1 =  mysqli_real_escape_string($conn, $username);
       $password1 = mysqli_real_escape_string($conn, $password);
 
-      $sql = "select * from admin where username = '" . $username1 . "'";
+      $sql = "select * from users where username = '" . $username1 . "'";
       $rs = mysqli_query($conn, $sql);
       $numRows = mysqli_num_rows($rs);
 
