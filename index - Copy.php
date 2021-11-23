@@ -115,11 +115,11 @@ font-size: 20px;"> Password is empty!!</p>
       <div class="card grey lighten-3">
         <div class="card-content">
           <h4 class="card-title center-align">Login</h4>
-          <form class="login-form" method="POST" action="authentication.php">
+          <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">person_outline</i>
-                <input class="validate" id="username" type="text" name="username" pattern="[A-Za-z]+" minlength="4" maxlength="10" required>
+                <input class="validate" id="username" type="text" name="username" pattern="[A-Za-z]+" minlength="4" maxlength="10" value="<?php echo isset($_POST['username']) ? $_POST['username'] : '' ?>" required>
                 <label for="username" data-error="wrong" data-success="right">username</label>
               </div>
               <div class="input-field col s12">
@@ -129,7 +129,7 @@ font-size: 20px;"> Password is empty!!</p>
               </div>
 
               <div class="row center-align">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Login
+                <button class="btn waves-effect waves-light" type="submit" name="action" value="<? echo $_SERVER['HTTP_REFERER']; ?>">Login
                   <i class="material-icons right">send</i>
                 </button>
               </div>
